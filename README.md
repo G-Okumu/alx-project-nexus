@@ -1,99 +1,131 @@
-# ProDev Frontend Engineering – Learning Documentation
+# EcoStore  
 
-##  Overview
-The **ProDev Frontend Engineering Program** by **ALX** is an intensive, hands-on course designed to equip learners with modern frontend engineering skills. It emphasizes **real-world project building**, **industry-standard practices**, and collaboration through capstone projects such as **Project Nexus**.
+![React](https://img.shields.io/badge/React-18-blue?logo=react) 
+![TypeScript](https://img.shields.io/badge/TypeScript-5.8.3-blue?logo=typescript)  ![TailwindCSS](https://img.shields.io/badge/TailwindCSS-3.4-38B2AC?logo=tailwind-css&logoColor=white)  ![Zustand](https://img.shields.io/badge/Zustand-State%20Management-orange)  
+![Vite](https://img.shields.io/badge/Vite-Bundler-646CFF?logo=vite&logoColor=yellow)  ![License](https://img.shields.io/badge/License-MIT-green)  
 
-The program covers **web and mobile development**, **progressive web apps (PWA)**, and key tools in the frontend ecosystem. It prepares learners for professional frontend engineering roles by focusing on technical depth, system design, and problem-solving.
+EcoStore is a **modern e-commerce product catalog frontend** built with **React, TypeScript, Tailwind CSS, and Zustand**.  
+It simulates a **real-world online store** where users can browse, filter, and sort products seamlessly, while also providing **authentication and protected routes**.  
 
-
-
-
-##  Major Learnings
-
-###  Key Technologies Covered
-- **Web Development**: HTML5, CSS3, JavaScript (ES6+), TypeScript  
-- **Frameworks & Libraries**: React.js, Next.js  
-- **Styling**: TailwindCSS, Component-based design  
-- **Mobile Development**: React Native, PWA fundamentals  
-- **Data & APIs**: REST API integration, GraphQL  
-- **State Management**: React Context API, hooks, state patterns  
-- **Tooling**: GitHub, Vite, ESLint, Prettier, Expo  
-- **System Design & Analysis**: Application architecture, scalability principles  
-
----
-
-### Important Frontend Concepts
-- **Next.js**: Server-side rendering (SSR), static site generation (SSG), dynamic routing, API routes  
-- **TailwindCSS**: Utility-first styling, responsive design, custom configurations  
-- **System Design & Analysis**: Designing maintainable, scalable frontend architectures  
-- **TypeScript**: Strong typing, interfaces, generics, avoiding `any`  
-- **GraphQL**: Schema design, queries, mutations, API integration with Apollo  
-- **API Integration**: Handling authentication, error states, pagination, and async operations  
+This project emphasizes **scalable frontend architecture**, **responsive UI/UX**, and **clean state management**, making it ideal for learning or extending into a full production app.  
 
 ---
 
 
-### Challenges Faced & Solutions
-1. **Managing complex state across components**  
-    Adopted Context API and explored external state management patterns  
 
-2. **Styling consistency across web and mobile**  
-    Leveraged TailwindCSS and component-driven design for reusable UI  
+## Demo  
 
-3. **Debugging API responses and type errors**  
-    Used TypeScript interfaces and strict typing to ensure safer integrations  
+### Login Page  
+![Login Page](public/login.png)  
 
-4. **Learning curve with Next.js features**  
-   Built small feature-focused projects (SSR blog, dynamic routes, API routes) before integrating into the capstone project
+### Product Catalog  
+![Product Catalog](public/product-cataloge.png)  
 
-5. Time constraint
-6. Meeting remote peers
+### Responsive View  
+![Responsive View](public/responsive-view.png)  
+
+
+## Features  
+
+### Authentication  
+- User login, registration, and logout.  
+- Zustand store manages user state (token + user info).  
+- Protected routes: only authenticated users can access the catalog.  
+
+### Product Catalog  
+- **Dynamic product list** with mock API integration (easy to swap with real API).  
+- **Filtering:** by category and price range.  
+- **Sorting:** by price (low → high, high → low) and alphabetically (A–Z, Z–A).  
+- **Pagination & Infinite Scrolling:** supports both numbered navigation and “load more on scroll.”  
+- **Responsive design:** works across desktop, tablet, and mobile.  
+- **Error handling & loaders:** skeleton states and fallback messages.  
+
+### ⚡ State Management (Zustand)  
+- **Auth slice:** manages user and session.  
+- **Product slice:** manages products, filters, sorting, and pagination state.  
+- Type-safe with **TypeScript interfaces** for maintainability.  
 
 ---
 
+## Tech Stack  
 
-### Best Practices & Personal Takeaways
-- Always **type your data** (avoid `any` in TypeScript)  
-- Break down complex UIs into **small, reusable components**  
-- Prefer **API abstraction layers** for scalability  
-- Document code and project setup for easier collaboration  
-- Testing and linting early prevents technical debt later  
-- Learn by **building real-world projects** – hands-on practice is the best teacher  
+- **React + TypeScript** → Component-based frontend  
+- **Tailwind CSS** → Modern, responsive styling  
+- **Zustand** → Lightweight global state management  
+- **React Router** → Navigation & protected routes  
+- **Mock API layer** → Easy swap-in for real backend  
 
 ---
 
-## Example Code Snippet
+## Project Structure  
 
-```tsx
-// Example: Strongly typed property card in TypeScript
-interface PropertyCardProps {
-  id: string;
-  image: string;
-  title: string;
-  city: string;
-  amenities: string[];
-  price: number;
-  originalPrice?: number;
-  badges: string[];
-}
+```plaintext
+EcoStore/
+├── src/
+│   ├── App.css
+|   ├── App.tsx
+|   ├── components
+|    │   ├── auth
+|    │   │   └── ProtectedRoute.tsx
+|    │   ├── layout
+|    │   │   └── Navbar.tsx
+|    │   ├── products
+|    │   │   ├── ProductCard.tsx
+|    │   │   └── ProductFilters.tsx
+|    │   └── ui/...
+|    ├── hooks # custom hooks
+|    │   ├── use-mobile.tsx
+|    │   └── use-toast.ts
+|    ├── index.css
+|    ├── lib
+|    │   ├── api
+|    │   │   ├── auth.ts
+|    │   │   └── products.ts
+|    │   └── utils.ts
+|    ├── main.tsx
+|    ├── pages
+|    │   ├── Cart.tsx
+|    │   ├── CheckOut.tsx
+|    │   ├── Home.tsx
+|    │   ├── Login.tsx
+|    │   ├── NotFound.tsx
+|    │   ├── Products.tsx
+|    │   └── Register.tsx
+|    ├── stores # Zustand store
+|    │   ├── authStore.ts
+|    │   ├── cartStore.ts
+|    │   └── productsStore.ts
+|    ├── types
+|    │   └── index.ts
+|    └── vite-env.d.ts
+├── Learning.md # ALX README
+├── README.md # Project README
 
-export function PropertyCard({ title, city, price, amenities }: PropertyCardProps) {
-  return (
-    <div className="rounded-xl shadow p-4">
-      <h2 className="text-lg font-bold">{title}</h2>
-      <p className="text-gray-600">{city}</p>
-      <p className="text-green-700 font-semibold">${price}</p>
-      <ul className="list-disc pl-4">
-        {amenities.map((a, i) => (
-          <li key={i}>{a}</li>
-        ))}
-      </ul>
-    </div>
-  );
-}
 ```
+##  Getting Started
+1. Clone the Repository
 
-### Author 
-``Name``:  George Okumu
+    ```$ git clone https://github.com/G-Okumu/alx-project-nexus.git```
 
-``Email``: gokumu368@gmail.com
+    ```$ cd ecostore ```
+
+2. Install Dependencies
+
+    ```$ npm install```
+
+3. Run the Development Server
+
+    ```$ npm run dev```
+
+
+App will be available at: ``http://localhost:8080/``
+
+## Future Improvements
+
+- Real Backend API integration
+- PayPal Mpesa payment
+- Admin dashboard for product management
+- Maaaaybe** PWA support
+
+## LICENSE
+- This project is open-source and available under the MIT License.
