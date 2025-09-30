@@ -1,10 +1,27 @@
+import { useNavigate } from "react-router-dom";
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useCartStore } from "@/stores/cartStore";
 import { Button } from "@/components/ui/button";
+import { useToast } from "@/hooks/use-toast";
 
 export default function CheckOut() {
-    const { items, itemCount, total } = useCartStore();
+    const { items, itemCount, total, clearCart } = useCartStore();
+    const { toast } = useToast();
+    const navigate = useNavigate();
+
+
+    const handlePlaceOrder = () => {
+        toast({
+            title: 'Order Placed successfully',
+            description: "Paypal integration is in progress. Soon you'll be paying real cash",
+        });
+
+        clearCart();
+        navigate('/products');
+    };
+
+
 
     return (
         <div className="container mx-auto px-4 py-8">
@@ -25,7 +42,7 @@ export default function CheckOut() {
             <Card className="mt-4">
                 <CardTitle className="p-4 flex items-center">Product List <span className="text-xs pl-4 text-muted-foreground">Summary ( {itemCount} items )</span></CardTitle>
                 {items.map((item) => (
-                    <CardContent className="p-4">
+                    <CardContent key={item.id} className="p-4">
                         <div className="grid gap-4 grid-cols-3 items-center">
                             {/* Product Image */}
                             <div className="flex items-center gap-2">
@@ -90,7 +107,7 @@ export default function CheckOut() {
                             <span className="text-destructive">Ksh.{(total * 1.08).toFixed(2)}</span>
                         </div>
 
-                        <Button className="w-full bg-destructive" size="lg">
+                        <Button className="w-full bg-destructive" size="lg" onClick={() => handlePlaceOrder()}>
                             Place Order
                         </Button>
                     </div>
