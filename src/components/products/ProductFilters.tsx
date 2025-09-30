@@ -104,7 +104,7 @@ export function ProductFilters({ categories, className }: ProductFiltersProps) {
             )}
             {filters.priceRange && (
               <Badge variant="secondary" className="text-xs">
-                ${filters.priceRange.min}-${filters.priceRange.max}
+                ksh.{filters.priceRange.min}-ksh.{filters.priceRange.max}
                 <Button
                   variant="ghost"
                   size="icon"
