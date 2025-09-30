@@ -11,6 +11,7 @@ import Register from "./pages/Register";
 import Products from "./pages/Products";
 import Cart from "./pages/Cart";
 import NotFound from "./pages/NotFound";
+import CheckOut from "./pages/CheckOut";
 
 const queryClient = new QueryClient();
 
@@ -39,6 +40,15 @@ const App = () => (
               element={
                 <ProtectedRoute>
                   <Cart />
+                </ProtectedRoute>
+              } 
+            />
+
+            <Route 
+              path="/checkout" 
+              element={
+                <ProtectedRoute>
+                  <CheckOut />
                 </ProtectedRoute>
               } 
             />

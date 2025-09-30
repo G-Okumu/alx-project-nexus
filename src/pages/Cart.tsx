@@ -1,4 +1,4 @@
-import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { Minus, Plus, Trash2, ShoppingBag, ArrowLeft } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -8,6 +8,7 @@ import { useCartStore } from '@/stores/cartStore';
 import { useToast } from '@/hooks/use-toast';
 
 export default function Cart() {
+  const navigate = useNavigate();
   const { items, total, itemCount, updateQuantity, removeItem, clearCart } = useCartStore();
   const { toast } = useToast();
 
@@ -200,7 +201,7 @@ export default function Cart() {
                 <span>Ksh.{(total * 1.08).toFixed(2)}</span>
               </div>
 
-              <Button className="w-full" size="lg">
+              <Button className="w-full" size="lg" onClick={() => navigate('/checkout')}>
                 Proceed to Checkout
               </Button>
 
